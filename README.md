@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# ant-design
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. 프로그램 설치
 
-## Available Scripts
+```javascript
+//1.
+create-react-app@5.0.0 my-doc
+//2.
+cd my-doc
+//3.
+npm i antd
+```
 
-In the project directory, you can run:
+2. setting
 
-### `npm start`
+```javascript
+// index.js 파일에서
+import React from "react";
+import ReactDOM from "react-dom";
+//import "antd/dist/antd.css";입력
+import "antd/dist/antd.css";
+// 아래 index.css위에 입력
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. 사용법1 - 필요한것만 찾아서 붙여넣기.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```javascript
+import
 
-### `npm test`
+import { DatePicker } from "antd";
+import 'antd/es/date-picker/style/css';
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <DatePicker />
+      </header>
+    </div>
+  );
+}
+```
 
-### `npm run build`
+3. 사용법2 -babel의 플러그인을 사용
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm run eject
+npm install babel-plugin-import --save-dev
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `npm run eject`
+4. 그외
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```javascript
+import {Row, Col} from 'antd';
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const colStyle = () => ({
+  height: 50,
+  backgroundColor: 'red',
+  opacity: Math.round(Math.random() * 10) / 10,
+});
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+function App() {
+  return(
+    <div className="App">
+      <Row
+        // type="flex" => 생략가능
+        justify="좌우정렬";
+        // start|center|end|space-between|space-around
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+        align="위아래정렬";
+        // top|middle|bottom
+      >
+      // 컬럼당 span의 수는 24여야 한다. 12 *2 = 24
+      // <Col span={24 중에 어느정도 차지할 지 정수}>
+        <Col span={12} style={colStyle()}>
+        <Col span={12} style={colStyle()}>
+      </Row>
+      <Row gutter={16}>
+      // gutter={16 + 8n 의 정수} *px임 최소한으로 16은 줘야한다.
+        <Col span={8} style={colStyle()}>
+        <Col span={8} style={colStyle()}>
+        <Col span={8} style={colStyle()}>
+      </Row>
+      <Row>
+      // <Col offset = {} ={24중 건너띄고 싶은 정수} >
+        <Col span={6} offset={?} style={colStyle()}>
+        <Col span={6} style={colStyle()}>
+        <Col span={6} style={colStyle()}>
+        <Col span={6} style={colStyle()}>
+      </Row>
+    </div>
+  );
+}
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default App;
+}
+```
